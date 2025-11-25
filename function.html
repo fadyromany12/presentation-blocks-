@@ -66,10 +66,10 @@
 
     /* Typography */
     .slide-title {
-        font-size: 2.8rem;
+        font-size: 2.5rem; /* Slightly smaller to fit more content */
         font-weight: 800;
         color: var(--text-light);
-        margin-bottom: 2rem;
+        margin-bottom: 1.5rem;
         padding-bottom: 0.5rem;
         border-bottom: 2px solid var(--border-mid);
     }
@@ -107,6 +107,26 @@
         font-weight: 700;
         color: white;
         margin-bottom: 0.5rem;
+    }
+
+    /* Specific Function List Styles */
+    .function-list li {
+        margin-bottom: 0.8rem;
+        padding-left: 1.5rem;
+        position: relative;
+        font-size: 1.1rem;
+    }
+    .function-list li::before {
+        content: "✓";
+        color: var(--konecta-yellow);
+        position: absolute;
+        left: 0;
+        font-weight: bold;
+    }
+    .system-list li::before {
+        content: "⚙️";
+        font-size: 1rem;
+        left: -0.2rem;
     }
 
     /* Navigation */
@@ -202,7 +222,7 @@
             </div>
         </section>
 
-        <!-- Slide 3: The Functional Scope (Big Picture Update) -->
+        <!-- Slide 3: The Functional Scope -->
         <section class="slide" data-slide-index="3">
             <h2 class="slide-title">2. System <span class="slide-title-accent">Ecosystem Overview</span></h2>
             <p class="text-xl mb-8">KOMPASS is a unified ERP integrating <strong>7 distinct operational pillars</strong> into a single source of truth:</p>
@@ -232,7 +252,6 @@
                     <h3 class="text-[var(--konecta-yellow)]">6. Scheduling & Planning</h3>
                     <p>Strategic workforce planning tools. Supports bulk CSV roster imports, shift pattern enforcement, and intelligent logic distinguishing "Day Off" from "Absent".</p>
                 </div>
-                <!-- Added 7th Pillar -->
                 <div class="benefit-card md:col-span-3 lg:col-span-3 xl:col-span-3 flex flex-col items-center text-center">
                     <h3 class="text-[var(--konecta-yellow)]">7. Administration & Security</h3>
                     <p class="max-w-2xl">Enterprise-grade governance foundation. Features Role-Based Access Control (RBAC), comprehensive audit trails for compliance, and system-wide broadcasting tools.</p>
@@ -240,8 +259,203 @@
             </div>
         </section>
 
-        <!-- Slide 4: The Migration Plan (Updated Title) -->
+        <!-- ============================================================== -->
+        <!-- NEW SLIDES 4-10: DEEP DIVES -->
+        <!-- ============================================================== -->
+
+        <!-- Slide 4: Deep Dive - Pillar 1 -->
         <section class="slide" data-slide-index="4">
+            <h2 class="slide-title">Deep Dive: <span class="slide-title-accent">Workforce Operations</span></h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <!-- User Capabilities -->
+                <div class="bg-gray-800 p-8 rounded-xl border border-gray-600">
+                    <h3 class="text-2xl text-white font-bold mb-6 border-b border-gray-600 pb-2">Agent Capabilities</h3>
+                    <ul class="function-list text-gray-300">
+                        <li><strong>Digital Punch Clock:</strong> One-click interface for Login, Breaks, Lunch, and Logout.</li>
+                        <li><strong>Project Allocation:</strong> Select specific client projects (e.g., "Lenovo Support") to log billable hours.</li>
+                        <li><strong>Real-Time Status:</strong> Visual feedback on current state (e.g., "On Lunch - 25 mins elapsed").</li>
+                        <li><strong>Aux Code Tracking:</strong> Log non-production time like "Coaching" or "Meeting" accurately.</li>
+                    </ul>
+                </div>
+                <!-- System Logic -->
+                <div class="bg-gray-900 p-8 rounded-xl border border-[var(--konecta-yellow)]">
+                    <h3 class="text-2xl text-[var(--konecta-yellow)] font-bold mb-6 border-b border-gray-700 pb-2">System Logic & Automation</h3>
+                    <ul class="function-list system-list text-gray-300">
+                        <li><strong>Adherence Engine:</strong> Calculates deviation (Tardy/Early Leave) by comparing actual punches vs. scheduled shifts instantly.</li>
+                        <li><strong>Validation Logic:</strong> Prevents sequential errors (e.g., trying to "Login" when already logged in).</li>
+                        <li><strong>Auto-Sweeper:</strong> Background job that identifies scheduled employees who failed to punch and marks them "Absent".</li>
+                        <li><strong>Live Dashboard:</strong> Pushes real-time state changes to the Manager's Command Center.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 5: Deep Dive - Pillar 2 -->
+        <section class="slide" data-slide-index="5">
+            <h2 class="slide-title">Deep Dive: <span class="slide-title-accent">Leave & Absence</span></h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <!-- User Capabilities -->
+                <div class="bg-gray-800 p-8 rounded-xl border border-gray-600">
+                    <h3 class="text-2xl text-white font-bold mb-6 border-b border-gray-600 pb-2">Employee Functions</h3>
+                    <ul class="function-list text-gray-300">
+                        <li><strong>Self-Service Portal:</strong> Submit Annual, Sick, or Casual leave requests directly.</li>
+                        <li><strong>Balance Visualization:</strong> View real-time remaining days for each leave type before applying.</li>
+                        <li><strong>Compliance Uploads:</strong> Mandatory PDF upload interface for "Sick Leave" justification.</li>
+                        <li><strong>Request History:</strong> Track status of all past and pending applications.</li>
+                    </ul>
+                </div>
+                <!-- System Logic -->
+                <div class="bg-gray-900 p-8 rounded-xl border border-[var(--konecta-yellow)]">
+                    <h3 class="text-2xl text-[var(--konecta-yellow)] font-bold mb-6 border-b border-gray-700 pb-2">System Logic & Automation</h3>
+                    <ul class="function-list system-list text-gray-300">
+                        <li><strong>Pre-Submission Validation:</strong> Instantly rejects requests if the user has insufficient balance.</li>
+                        <li><strong>Smart Routing:</strong> Dynamically routes approval to Project Manager or Direct Manager based on hierarchy.</li>
+                        <li><strong>Auto-Deduction:</strong> Debits leave balances immediately upon final approval.</li>
+                        <li><strong>Schedule Integration:</strong> Automatically updates the shift roster to reflect "On Leave" status for approved dates.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 6: Deep Dive - Pillar 3 -->
+        <section class="slide" data-slide-index="6">
+            <h2 class="slide-title">Deep Dive: <span class="slide-title-accent">HRIS & Digital Files</span></h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <!-- User Capabilities -->
+                <div class="bg-gray-800 p-8 rounded-xl border border-gray-600">
+                    <h3 class="text-2xl text-white font-bold mb-6 border-b border-gray-600 pb-2">Profile Management</h3>
+                    <ul class="function-list text-gray-300">
+                        <li><strong>Digital Profile:</strong> Employees can view and update contact details (Address, Phone, Emergency Contact).</li>
+                        <li><strong>Hierarchy View:</strong> Interactive "Tree View" allowing managers to navigate their direct and indirect reports.</li>
+                        <li><strong>Movement Requests:</strong> Formal workflow for requesting supervisor changes (Reporting Line updates).</li>
+                        <li><strong>Document Access:</strong> Secure links to personal Payslips and Contracts.</li>
+                    </ul>
+                </div>
+                <!-- System Logic -->
+                <div class="bg-gray-900 p-8 rounded-xl border border-[var(--konecta-yellow)]">
+                    <h3 class="text-2xl text-[var(--konecta-yellow)] font-bold mb-6 border-b border-gray-700 pb-2">System Logic & Automation</h3>
+                    <ul class="function-list system-list text-gray-300">
+                        <li><strong>Asset Provisioning:</strong> Automatically generates and names Google Drive folders for new hires.</li>
+                        <li><strong>Sensitive Data Guard:</strong> Monitors critical fields (IBAN, Name); changes trigger an audit log/approval request.</li>
+                        <li><strong>Structure Integrity:</strong> Prevents circular reporting lines when processing hierarchy moves.</li>
+                        <li><strong>Offboarding Protocol:</strong> Standardized termination sequence to revoke access and archive data.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 7: Deep Dive - Pillar 4 -->
+        <section class="slide" data-slide-index="7">
+            <h2 class="slide-title">Deep Dive: <span class="slide-title-accent">QA & Performance</span></h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <!-- User Capabilities -->
+                <div class="bg-gray-800 p-8 rounded-xl border border-gray-600">
+                    <h3 class="text-2xl text-white font-bold mb-6 border-b border-gray-600 pb-2">Manager & Agent Tools</h3>
+                    <ul class="function-list text-gray-300">
+                        <li><strong>Template Selection:</strong> Managers choose from dynamic templates (e.g., "Q1 Sales", "Soft Skills").</li>
+                        <li><strong>Scorecard Submission:</strong> Interactive forms for rating criteria and adding qualitative feedback.</li>
+                        <li><strong>Digital Acknowledgement:</strong> Agents must sign off on feedback digitally, ensuring alignment.</li>
+                        <li><strong>History Review:</strong> Access to a chronological log of all performance scores and reviews.</li>
+                    </ul>
+                </div>
+                <!-- System Logic -->
+                <div class="bg-gray-900 p-8 rounded-xl border border-[var(--konecta-yellow)]">
+                    <h3 class="text-2xl text-[var(--konecta-yellow)] font-bold mb-6 border-b border-gray-700 pb-2">System Logic & Automation</h3>
+                    <ul class="function-list system-list text-gray-300">
+                        <li><strong>Dynamic Rendering:</strong> Generates form fields on the fly based on the selected JSON template.</li>
+                        <li><strong>Score Calculation:</strong> Auto-computes weighted averages and percentages for QA sessions.</li>
+                        <li><strong>Feedback Loop Enforcement:</strong> Tracks "Pending Acknowledgement" status to ensure compliance.</li>
+                        <li><strong>Data Isolation:</strong> Ensures agents only see their own reviews, while managers see their team's.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 8: Deep Dive - Pillar 5 -->
+        <section class="slide" data-slide-index="8">
+            <h2 class="slide-title">Deep Dive: <span class="slide-title-accent">Recruitment (ATS)</span></h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <!-- User Capabilities -->
+                <div class="bg-gray-800 p-8 rounded-xl border border-gray-600">
+                    <h3 class="text-2xl text-white font-bold mb-6 border-b border-gray-600 pb-2">Recruitment Functions</h3>
+                    <ul class="function-list text-gray-300">
+                        <li><strong>Public Job Board:</strong> External-facing application portal for candidates to submit data and CVs.</li>
+                        <li><strong>Pipeline View:</strong> Kanban-style status management (Applied &rarr; Interview &rarr; Offer &rarr; Hired).</li>
+                        <li><strong>Candidate Search:</strong> Filterable database of all applicants and their history.</li>
+                        <li><strong>Hiring Wizard:</strong> A simplified form to finalize contract details for selected candidates.</li>
+                    </ul>
+                </div>
+                <!-- System Logic -->
+                <div class="bg-gray-900 p-8 rounded-xl border border-[var(--konecta-yellow)]">
+                    <h3 class="text-2xl text-[var(--konecta-yellow)] font-bold mb-6 border-b border-gray-700 pb-2">System Logic & Automation</h3>
+                    <ul class="function-list system-list text-gray-300">
+                        <li><strong>One-Click Hiring:</strong> Triggering "Hire" creates the DB record, generates Employee ID, and initializes balances instantly.</li>
+                        <li><strong>Duplicate Detection:</strong> Flags candidates who have applied previously to prevent redundancy.</li>
+                        <li><strong>External Integration:</strong> Fetches applications from a secure buffer sheet to protect internal data.</li>
+                        <li><strong>Status Transitioning:</strong> Automates the lifecycle movement from "Candidate" to "Employee".</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 9: Deep Dive - Pillar 6 -->
+        <section class="slide" data-slide-index="9">
+            <h2 class="slide-title">Deep Dive: <span class="slide-title-accent">Scheduling & Planning</span></h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <!-- User Capabilities -->
+                <div class="bg-gray-800 p-8 rounded-xl border border-gray-600">
+                    <h3 class="text-2xl text-white font-bold mb-6 border-b border-gray-600 pb-2">Planning Tools</h3>
+                    <ul class="function-list text-gray-300">
+                        <li><strong>Bulk CSV Import:</strong> Upload rosters for hundreds of agents at once using a standardized template.</li>
+                        <li><strong>Manual Editor:</strong> Fine-tune individual shifts or override statuses for specific days.</li>
+                        <li><strong>Status Designation:</strong> Explicitly mark days as "Shift", "Day Off", or "Leave".</li>
+                        <li><strong>Template Download:</strong> Download current roster formats for offline editing.</li>
+                    </ul>
+                </div>
+                <!-- System Logic -->
+                <div class="bg-gray-900 p-8 rounded-xl border border-[var(--konecta-yellow)]">
+                    <h3 class="text-2xl text-[var(--konecta-yellow)] font-bold mb-6 border-b border-gray-700 pb-2">System Logic & Automation</h3>
+                    <ul class="function-list system-list text-gray-300">
+                        <li><strong>Gap Detection:</strong> Distinguishes between a "Scheduled Day Off" (No punch needed) and "Absent" (Missed shift).</li>
+                        <li><strong>Format Validation:</strong> Parses incoming CSVs for date/time errors before committing to the database.</li>
+                        <li><strong>Conflict Resolution:</strong> Prioritizes "Approved Leave" over uploaded shift data to prevent errors.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 10: Deep Dive - Pillar 7 -->
+        <section class="slide" data-slide-index="10">
+            <h2 class="slide-title">Deep Dive: <span class="slide-title-accent">Administration & Security</span></h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <!-- User Capabilities -->
+                <div class="bg-gray-800 p-8 rounded-xl border border-gray-600">
+                    <h3 class="text-2xl text-white font-bold mb-6 border-b border-gray-600 pb-2">Superadmin Controls</h3>
+                    <ul class="function-list text-gray-300">
+                        <li><strong>User Registration Gateway:</strong> Review and approve/deny new account requests before activation.</li>
+                        <li><strong>Role Management:</strong> Process requests for role elevation (e.g., Agent to Admin).</li>
+                        <li><strong>Announcements:</strong> Create and broadcast system-wide banners to all active users.</li>
+                        <li><strong>Template Builder:</strong> Create and modify coaching forms without code changes.</li>
+                    </ul>
+                </div>
+                <!-- System Logic -->
+                <div class="bg-gray-900 p-8 rounded-xl border border-[var(--konecta-yellow)]">
+                    <h3 class="text-2xl text-[var(--konecta-yellow)] font-bold mb-6 border-b border-gray-700 pb-2">System Logic & Automation</h3>
+                    <ul class="function-list system-list text-gray-300">
+                        <li><strong>RBAC Enforcement:</strong> Strict Role-Based Access Control ensuring secure data partitioning.</li>
+                        <li><strong>Audit Logging:</strong> Immutable logs of every critical action (Timestamp, User ID, Action Type).</li>
+                        <li><strong>Session Security:</strong> Validates user identity against the database on every API call.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- END NEW SLIDES -->
+        <!-- ============================================================== -->
+
+        <!-- Slide 11: The Migration Plan (Updated Index) -->
+        <section class="slide" data-slide-index="11">
             <h2 class="slide-title">3. Migration <span class="slide-title-accent">Responsibilities</span></h2>
             <div class="bg-gray-800 p-8 rounded-xl border border-[var(--konecta-yellow)] mb-8">
                 <p class="text-2xl text-white text-center">
@@ -274,8 +488,8 @@
             </div>
         </section>
 
-        <!-- Slide 5: Technical Architecture -->
-        <section class="slide" data-slide-index="5">
+        <!-- Slide 12: Technical Architecture (Updated Index) -->
+        <section class="slide" data-slide-index="12">
             <h2 class="slide-title">4. Target <span class="slide-title-accent">Architecture</span></h2>
             <p class="text-xl mb-10">Transitioning from a monolithic script to a professional <strong>3-Tier Enterprise Architecture</strong>.</p>
 
@@ -319,8 +533,8 @@
             </div>
         </section>
 
-        <!-- Slide 6: Forecast & Capacity -->
-        <section class="slide" data-slide-index="6">
+        <!-- Slide 13: Forecast & Capacity (Updated Index) -->
+        <section class="slide" data-slide-index="13">
             <h2 class="slide-title">5. Resource <span class="slide-title-accent">Forecast</span></h2>
             <p class="text-xl mb-8">Projected capacity requirements for server sizing based on 200 active users.</p>
 
@@ -365,8 +579,8 @@
             </div>
         </section>
 
-        <!-- Slide 7: Roadmap -->
-        <section class="slide" data-slide-index="7">
+        <!-- Slide 14: Roadmap (Updated Index) -->
+        <section class="slide" data-slide-index="14">
             <h2 class="slide-title">6. Execution <span class="slide-title-accent">Roadmap</span></h2>
             <div class="space-y-6">
                 <!-- Step 1 -->
@@ -398,8 +612,8 @@
             </div>
         </section>
 
-        <!-- Slide 8: Conclusion -->
-        <section class="slide text-center" data-slide-index="8">
+        <!-- Slide 15: Conclusion (Updated Index) -->
+        <section class="slide text-center" data-slide-index="15">
             <h2 class="text-5xl font-bold text-white mb-8">Ready to Execute</h2>
             <p class="text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
                 With the logic defined, the plan established, and the capabilities aligned, the foundation is set. Once the infrastructure is provisioned, the transformation of KOMPASS into a scalable enterprise asset begins.
@@ -417,7 +631,7 @@
     <footer id="nav-controls">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <button id="prev-btn" class="nav-button">Previous</button>
-            <span id="slide-counter" class="text-[var(--konecta-yellow)] font-bold text-lg">1 / 8</span>
+            <span id="slide-counter" class="text-[var(--konecta-yellow)] font-bold text-lg">1 / 15</span>
             <button id="next-btn" class="nav-button">Next</button>
         </div>
     </footer>
