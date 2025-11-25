@@ -3,270 +3,465 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KOMPASS Migration Strategy</title>
-    <style>
-        :root {
-            --konecta-dark: #2900c9;
-            --konecta-blue: #00a9e0;
-            --text-main: #111827;
-            --bg-slide: #ffffff;
-        }
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: #f3f4f6;
-            color: var(--text-main);
-            overflow-x: hidden;
-        }
-        .slide-container {
-            scroll-snap-type: y mandatory;
-            overflow-y: scroll;
-            height: 100vh;
-        }
-        .slide {
-            height: 100vh;
-            width: 100vw;
-            scroll-snap-align: start;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 40px;
-            box-sizing: border-box;
-            background: var(--bg-slide);
-            border-bottom: 1px solid #e5e7eb;
-            position: relative;
-        }
-        .slide:nth-child(even) {
-            background: #f9fafb;
-        }
-        .slide-content {
-            max-width: 900px;
-            width: 100%;
-        }
-        h1 {
-            font-size: 3.5rem;
-            color: var(--konecta-dark);
-            margin-bottom: 0.5rem;
-            line-height: 1.1;
-        }
-        h2 {
-            font-size: 2.5rem;
-            color: var(--konecta-blue);
-            margin-bottom: 1.5rem;
-        }
-        h3 {
-            font-size: 1.5rem;
-            color: var(--konecta-dark);
-            margin-top: 0;
-        }
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        li {
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-        li::before {
-            content: "•";
-            color: var(--konecta-blue);
-            font-weight: bold;
-            font-size: 1.5rem;
-            position: absolute;
-            left: 0;
-            top: -5px;
-        }
-        .highlight {
-            background-color: #e0e7ff;
-            color: var(--konecta-dark);
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-weight: 600;
-        }
-        .footer {
-            position: absolute;
-            bottom: 20px;
-            right: 40px;
-            font-size: 0.9rem;
-            color: #9ca3af;
-        }
-        .logo {
-            position: absolute;
-            top: 40px;
-            right: 40px;
-            font-weight: bold;
-            color: var(--konecta-dark);
-            font-size: 1.2rem;
-        }
-        .roadmap-step {
-            background: white;
-            border-left: 5px solid var(--konecta-blue);
-            padding: 15px;
-            margin-bottom: 15px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
-        .btn-nav {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--konecta-dark);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 30px;
-            text-decoration: none;
-            box-shadow: 0 4px 10px rgba(41, 0, 201, 0.3);
-            z-index: 100;
-            font-weight: 600;
-        }
-    </style>
+    <title>KOMPASS Migration - Fady Bekhet</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+    /* Konecta Brand Theme based on your reference */
+    :root {
+        --konecta-dark: #2a01cd; 
+        --konecta-yellow: #f0fa00;
+        --konecta-yellow-light: rgba(240, 250, 0, 0.7);
+        --text-light: #E5E7EB; 
+        --text-dim: #D1D5DB; 
+        --bg-card: #1F2937; 
+        --border-mid: #374151;
+    }
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    body {
+        font-family: 'Inter', sans-serif;
+        background-color: var(--konecta-dark); 
+        color: var(--text-light);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+
+    /* Slide container */
+    #presentation-container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        flex-grow: 1;
+        overflow: hidden;
+    }
+
+    /* Individual slide styles */
+    .slide {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+        pointer-events: none;
+        z-index: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 3rem 5rem;
+    }
+
+    .slide.active {
+        opacity: 1;
+        pointer-events: auto;
+        z-index: 10;
+    }
+
+    /* Typography */
+    .slide-title {
+        font-size: 2.8rem;
+        font-weight: 800;
+        color: var(--text-light);
+        margin-bottom: 2rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid var(--border-mid);
+    }
+    
+    .slide-title-accent {
+        color: var(--konecta-yellow);
+    }
+    
+    p, li {
+        color: var(--text-dim);
+        line-height: 1.6;
+    }
+
+    strong {
+        color: white;
+        font-weight: 600;
+    }
+
+    /* Cards */
+    .benefit-card {
+        background-color: var(--bg-card);
+        padding: 1.5rem;
+        border-radius: 0.75rem;
+        border-top: 4px solid var(--konecta-yellow-light);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        transition: transform 0.2s;
+        height: 100%;
+    }
+    .benefit-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.4);
+    }
+    .benefit-card h3 {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 0.5rem;
+    }
+
+    /* Navigation */
+    #nav-controls {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(8px);
+        z-index: 20;
+        border-top: 1px solid var(--border-mid);
+        padding: 1rem;
+    }
+    .nav-button {
+        background-color: #1F2937;
+        color: white;
+        font-weight: 600;
+        padding: 0.5rem 1.5rem;
+        border-radius: 0.5rem;
+        border: 1px solid var(--border-mid);
+        transition: all 0.2s;
+    }
+    .nav-button:hover {
+        background-color: var(--konecta-yellow);
+        color: #111827;
+        border-color: var(--konecta-yellow);
+    }
+    .nav-button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    /* Custom List Bullets */
+    ul.custom-list li {
+        position: relative;
+        padding-left: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    ul.custom-list li::before {
+        content: "•";
+        color: var(--konecta-yellow);
+        font-weight: bold;
+        font-size: 1.5rem;
+        position: absolute;
+        left: 0;
+        top: -0.2rem;
+    }
+</style>
 </head>
 <body>
 
-    <a href="#" class="btn-nav" onclick="document.querySelector('.slide-container').scrollBy(0, window.innerHeight)">Next Slide ▼</a>
+    <main id="presentation-container">
 
-    <div class="slide-container">
-        
-        <div class="slide">
-            <div class="logo">KOMPASS</div>
-            <div class="slide-content" style="text-align: center;">
-                <h1 style="margin-bottom: 10px;">KOMPASS Migration</h1>
-                <h3 style="color: #6b7280; font-weight: 400;">From Apps Script Prototype to Cloud Enterprise Application</h3>
-                <hr style="width: 100px; border: 2px solid var(--konecta-blue); margin: 30px auto;">
-                <p style="font-size: 1.2rem;"><strong>Goal:</strong> Migrate our 7-module HR Super-App to a scalable Node.js & PostgreSQL architecture on Google Cloud.</p>
+        <!-- Slide 1: Title -->
+        <section class="slide active text-center" data-slide-index="1">
+            <div class="mx-auto mb-8 p-6 bg-[#2a01cd] border-2 border-[var(--konecta-yellow)] rounded-xl inline-block shadow-lg shadow-[var(--konecta-yellow)]/20">
+                <h1 class="text-7xl font-extrabold text-white tracking-tight">KOMPASS</h1>
+                <p class="text-xl text-[var(--konecta-yellow)] font-medium mt-2 uppercase tracking-widest">Migration Strategy & Functional Roadmap</p>
             </div>
-            <div class="footer">Slide 1/9</div>
-        </div>
-
-        <div class="slide">
-            <div class="logo">KOMPASS</div>
-            <div class="slide-content">
-                <h2>1. Workforce Management (WFM)</h2>
-                <p>Replacing the "Adherence" and "Punch" sheets with a high-speed SQL database.</p>
-                <ul>
-                    <li><strong>Smart Punch Clock:</strong> Validates "Login", "Break", and "Logout" in real-time. Prevents double-punching and sequential errors.</li>
-                    <li><strong>Adherence Engine:</strong> Automatically compares <em>Actual Punch Time</em> vs. <em>Scheduled Shift</em> to calculate <span class="highlight">Tardy</span> and <span class="highlight">Early Leave</span> seconds.</li>
-                    <li><strong>Project Tracking:</strong> Users select active projects (e.g., "Lenovo Support") to log billable hours per session.</li>
-                    <li><strong>Auto-Sweeper:</strong> A background job that runs daily to mark employees as "Absent" if they were scheduled but didn't punch in.</li>
-                </ul>
+            <p class="text-3xl font-light text-gray-300 mt-4">From Prototype to <span class="text-white font-semibold">Enterprise Cloud Architecture</span></p>
+            <div class="mt-20 flex justify-center items-center gap-4">
+                <div class="h-[1px] w-20 bg-gray-500"></div>
+                <p class="text-xl text-gray-400">Project Lead: <strong class="text-white">Fady Bekhet</strong></p>
+                <div class="h-[1px] w-20 bg-gray-500"></div>
             </div>
-            <div class="footer">Slide 2/9</div>
-        </div>
+        </section>
 
-        <div class="slide">
-            <div class="logo">KOMPASS</div>
-            <div class="slide-content">
-                <h2>2. Leave & Absence</h2>
-                <p>Moving from "Leave Requests" sheet to a relational transaction model.</p>
-                <ul>
-                    <li><strong>Balance Validation:</strong> Instant check against Annual/Sick/Casual balances before submission.</li>
-                    <li><strong>Dynamic Routing:</strong> Workflow routes requests: <em>Agent &rarr; Project Manager &rarr; Direct Manager &rarr; Approved</em>.</li>
-                    <li><strong>Sick Note Compliance:</strong> Enforces PDF uploads for sick leave. Files will move from Drive Folders to <strong>Google Cloud Storage</strong>.</li>
-                    <li><strong>Monthly Accrual:</strong> Automated script increments leave balances based on employee tenure (1+ year vs 10+ years).</li>
-                </ul>
-            </div>
-            <div class="footer">Slide 3/9</div>
-        </div>
-
-        <div class="slide">
-            <div class="logo">KOMPASS</div>
-            <div class="slide-content">
-                <h2>3. HRIS & Digital Files</h2>
-                <p>Centralizing Employee Core Data and PII.</p>
-                <ul>
-                    <li><strong>Digital Employee Files:</strong> We currently auto-generate Drive folders for every user (Payslips, Contracts).</li>
-                    <li><strong>Self-Service Profile:</strong> Agents update their own Address/Phone. Sensitive changes (IBAN) trigger an approval request log.</li>
-                    <li><strong>Hierarchy Visualization:</strong> A recursive "Tree View" allowing managers to see their direct and indirect reports.</li>
-                    <li><strong>Movement Requests:</strong> Formalized workflow for changing an employee's supervisor (Reporting Line changes).</li>
-                </ul>
-            </div>
-            <div class="footer">Slide 4/9</div>
-        </div>
-
-        <div class="slide">
-            <div class="logo">KOMPASS</div>
-            <div class="slide-content">
-                <h2>4. Talent & Quality (QA)</h2>
-                <p>Digitizing the Coaching and Review process.</p>
-                <ul>
-                    <li><strong>Dynamic Templates:</strong> Managers select templates (e.g., "Q1 Sales") which populate specific scoring criteria.</li>
-                    <li><strong>Performance Reviews:</strong> Quarterly/Annual review forms with 1-5 ratings stored historically.</li>
-                    <li><strong>Feedback Loop:</strong> Agents must digitally "Acknowledge" coaching sessions, creating a timestamped audit trail.</li>
-                </ul>
-            </div>
-            <div class="footer">Slide 5/9</div>
-        </div>
-
-        <div class="slide">
-            <div class="logo">KOMPASS</div>
-            <div class="slide-content">
-                <h2>5. Recruitment (ATS)</h2>
-                <p>Managing the "Candidate to Employee" lifecycle.</p>
-                <ul>
-                    <li><strong>Public Job Board:</strong> External facing application form for candidates.</li>
-                    <li><strong>Pipeline Management:</strong> Admin view to move candidates through stages (New &rarr; Interview &rarr; Offer).</li>
-                    <li><strong>One-Click Hiring:</strong> The "Hire" button automatically generates the Employee ID, creates the DB record, and initializes Drive folders.</li>
-                </ul>
-            </div>
-            <div class="footer">Slide 6/9</div>
-        </div>
-
-        <div class="slide">
-            <div class="logo">KOMPASS</div>
-            <div class="slide-content">
-                <h2>6. Scheduling & Security</h2>
-                <p>Enterprise-grade control and planning.</p>
-                <ul>
-                    <li><strong>Shift Planning:</strong> Admin interface to assign shifts and "Day Off" status.</li>
-                    <li><strong>Bulk CSV Import:</strong> Ability to upload hundreds of schedules at once.</li>
-                    <li><strong>RBAC Security:</strong> Strict Role-Based Access Control. <em>Agents</em> see self; <em>Managers</em> see team; <em>Superadmins</em> see all.</li>
-                    <li><strong>Audit Logs:</strong> Every action (Punch, Approval, Edit) is logged with User ID and Timestamp.</li>
-                </ul>
-            </div>
-            <div class="footer">Slide 7/9</div>
-        </div>
-
-        <div class="slide">
-            <div class="logo">KOMPASS</div>
-            <div class="slide-content">
-                <h2>Technical Roadmap</h2>
-                <div class="roadmap-step">
-                    <strong>Phase 1: Infrastructure (Programmers)</strong><br>
-                    Set up VM, Install Node.js, Install PostgreSQL, Configure Google Cloud Storage (for files).
+        <!-- Slide 2: Current State -->
+        <section class="slide" data-slide-index="2">
+            <h2 class="slide-title">1. Current <span class="slide-title-accent">Operational State</span></h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <p class="text-2xl text-gray-200 mb-6 leading-relaxed">
+                        The existing system is a fully functional <strong class="text-[var(--konecta-yellow)]">MVP (Minimum Viable Product)</strong> that currently manages core operations.
+                    </p>
+                    <ul class="custom-list text-xl text-gray-300">
+                        <li>It handles <strong>real-time adherence</strong>, schedule validation, and leave requests.</li>
+                        <li>It operates on a serverless <strong>Google Apps Script</strong> environment.</li>
+                        <li>The business logic has been validated and proven to reduce administrative overhead.</li>
+                    </ul>
                 </div>
-                <div class="roadmap-step">
-                    <strong>Phase 2: Database Migration (Joint Effort)</strong><br>
-                    I will provide the <em>Schema Definition</em>. We need to create the tables (Users, Punches, Requests) and migrate data from Google Sheets.
-                </div>
-                <div class="roadmap-step">
-                    <strong>Phase 3: Backend Logic (My Focus)</strong><br>
-                    I will translate the business logic from <code>code.gs</code> to a <strong>Node.js/Express API</strong>.
-                </div>
-                <div class="roadmap-step">
-                    <strong>Phase 4: Integration</strong><br>
-                    Connect the existing Frontend (HTML) to the new Node.js API endpoints.
+                <div class="bg-gray-800 p-8 rounded-xl border border-red-500/50 shadow-lg">
+                    <h3 class="text-xl font-bold text-red-400 mb-4">⚠️ Scalability Drivers</h3>
+                    <p class="text-gray-300 mb-4">Migrating to a robust infrastructure is necessary to mitigate current risks:</p>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-start"><span class="mr-2 text-red-500">✖</span> <strong>Performance:</strong> Spreadsheet-based databases degrade after ~50k records.</li>
+                        <li class="flex items-start"><span class="mr-2 text-red-500">✖</span> <strong>Concurrency:</strong> High traffic volumes can cause script timeouts.</li>
+                        <li class="flex items-start"><span class="mr-2 text-red-500">✖</span> <strong>Security:</strong> Enterprise-grade data isolation requires a SQL database.</li>
+                    </ul>
                 </div>
             </div>
-            <div class="footer">Slide 8/9</div>
-        </div>
+        </section>
 
-        <div class="slide">
-            <div class="logo">KOMPASS</div>
-            <div class="slide-content">
-                <h2>Immediate Requirements</h2>
-                <p>To begin development, I need the following from the DevOps/Cloud team:</p>
-                <ul>
-                    <li><span class="highlight">Database Access:</span> Host, Port, Database Name, User, Password (PostgreSQL).</li>
-                    <li><span class="highlight">VM Access:</span> SSH Credentials or Console Access to deploy the Node.js app.</li>
-                    <li><span class="highlight">GCP Service Account:</span> A JSON Key file with permissions for <strong>Google Drive API</strong> and <strong>Cloud Storage</strong> (to maintain file upload functionality).</li>
-                </ul>
+        <!-- Slide 3: The Functional Scope (Big Picture Update) -->
+        <section class="slide" data-slide-index="3">
+            <h2 class="slide-title">2. System <span class="slide-title-accent">Ecosystem Overview</span></h2>
+            <p class="text-xl mb-8">KOMPASS is a unified ERP integrating <strong>7 distinct operational pillars</strong> into a single source of truth:</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="benefit-card">
+                    <h3 class="text-[var(--konecta-yellow)]">1. Workforce Operations</h3>
+                    <p>A real-time Time & Attendance engine. It includes a smart punch clock, adherence calculation logic (Tardy/Overtime), and live floor monitoring dashboards.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3 class="text-[var(--konecta-yellow)]">2. Leave & Absence</h3>
+                    <p>End-to-end absence management. Features self-service requests, automated balance accruals, multi-tier approval workflows, and "Sick Note" compliance.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3 class="text-[var(--konecta-yellow)]">3. HRIS & Digital Files</h3>
+                    <p>The employee "Digital Twin." Automatically generates Drive folders for every user, manages reporting lines hierarchy, and secures PII data.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3 class="text-[var(--konecta-yellow)]">4. QA & Performance</h3>
+                    <p>A comprehensive talent management suite. Managers utilize dynamic coaching templates, track long-term scores, and enforce digital acknowledgement loops.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3 class="text-[var(--konecta-yellow)]">5. Recruitment (ATS)</h3>
+                    <p>Full-cycle Applicant Tracking System. Manages candidates from public application to interview stages, with one-click hiring that provisions all assets instantly.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3 class="text-[var(--konecta-yellow)]">6. Scheduling & Planning</h3>
+                    <p>Strategic workforce planning tools. Supports bulk CSV roster imports, shift pattern enforcement, and intelligent logic distinguishing "Day Off" from "Absent".</p>
+                </div>
+                <!-- Added 7th Pillar -->
+                <div class="benefit-card md:col-span-3 lg:col-span-3 xl:col-span-3 flex flex-col items-center text-center">
+                    <h3 class="text-[var(--konecta-yellow)]">7. Administration & Security</h3>
+                    <p class="max-w-2xl">Enterprise-grade governance foundation. Features Role-Based Access Control (RBAC), comprehensive audit trails for compliance, and system-wide broadcasting tools.</p>
+                </div>
             </div>
-            <div class="footer">Slide 9/9</div>
-        </div>
+        </section>
 
-    </div>
+        <!-- Slide 4: The Migration Plan (Updated Title) -->
+        <section class="slide" data-slide-index="4">
+            <h2 class="slide-title">3. Migration <span class="slide-title-accent">Responsibilities</span></h2>
+            <div class="bg-gray-800 p-8 rounded-xl border border-[var(--konecta-yellow)] mb-8">
+                <p class="text-2xl text-white text-center">
+                    Strategic division of labor between Application Logic and Infrastructure.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mt-4">
+                <!-- My Role -->
+                <div>
+                    <h3 class="text-2xl font-bold text-white mb-4 border-b border-gray-600 pb-2">Application Development (Fady)</h3>
+                    <ul class="custom-list text-lg">
+                        <li><strong>Backend Architecture:</strong> Translation of Apps Script logic into a scalable <strong>Node.js</strong> environment.</li>
+                        <li><strong>Business Logic Preservation:</strong> Ensuring complex calculation logic (Adherence, Balances) is replicated accurately.</li>
+                        <li><strong>API Development:</strong> Creation of RESTful endpoints for frontend integration.</li>
+                        <li><strong>Schema Definition:</strong> Designing the relational database structure for PostgreSQL.</li>
+                    </ul>
+                </div>
+
+                <!-- Infrastructure Team -->
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-400 mb-4 border-b border-gray-600 pb-2">Infrastructure Team</h3>
+                    <ul class="custom-list text-lg text-gray-400">
+                        <li><strong>VM Provisioning:</strong> Deployment and configuration of the Google Cloud Compute Engine.</li>
+                        <li><strong>Database Administration:</strong> Installation and initial setup of the PostgreSQL instance.</li>
+                        <li><strong>Network Security:</strong> Management of firewalls, SSL certificates, and secure access protocols.</li>
+                        <li><strong>Disaster Recovery:</strong> Implementation of automated backup and snapshot strategies.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 5: Technical Architecture -->
+        <section class="slide" data-slide-index="5">
+            <h2 class="slide-title">4. Target <span class="slide-title-accent">Architecture</span></h2>
+            <p class="text-xl mb-10">Transitioning from a monolithic script to a professional <strong>3-Tier Enterprise Architecture</strong>.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                <!-- Tier 1 -->
+                <div class="bg-gray-900 p-6 rounded-lg border border-blue-500/30">
+                    <div class="text-4xl mb-2">🖥️</div>
+                    <h3 class="text-xl font-bold text-white">Presentation Layer</h3>
+                    <p class="text-sm text-blue-300 mt-2">HTML / CSS / JS</p>
+                    <hr class="border-gray-700 my-4">
+                    <p class="text-gray-400 text-sm">The existing user interface framework, updated to consume secure API data streams.</p>
+                </div>
+
+                <!-- Arrow -->
+                <div class="flex items-center justify-center text-gray-500 text-4xl">
+                    ➔
+                </div>
+
+                <!-- Tier 2 -->
+                <div class="bg-gray-800 p-6 rounded-lg border-2 border-[var(--konecta-yellow)] shadow-[0_0_20px_rgba(240,250,0,0.15)]">
+                    <div class="text-4xl mb-2">⚙️</div>
+                    <h3 class="text-xl font-bold text-[var(--konecta-yellow)]">Application Layer</h3>
+                    <p class="text-sm text-yellow-200/70 mt-2">Node.js / Express</p>
+                    <hr class="border-gray-600 my-4">
+                    <p class="text-gray-300 text-sm">Centralized business logic handling authentication, adherence rules, and workflow routing.</p>
+                </div>
+
+                <!-- Arrow -->
+                <div class="flex items-center justify-center text-gray-500 text-4xl">
+                    ➔
+                </div>
+
+                <!-- Tier 3 -->
+                <div class="bg-gray-900 p-6 rounded-lg border border-green-500/30">
+                    <div class="text-4xl mb-2">🗄️</div>
+                    <h3 class="text-xl font-bold text-white">Data Layer</h3>
+                    <p class="text-sm text-green-300 mt-2">PostgreSQL</p>
+                    <hr class="border-gray-700 my-4">
+                    <p class="text-gray-400 text-sm">Relational database ensuring data integrity, ACID compliance, and secure storage.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 6: Forecast & Capacity -->
+        <section class="slide" data-slide-index="6">
+            <h2 class="slide-title">5. Resource <span class="slide-title-accent">Forecast</span></h2>
+            <p class="text-xl mb-8">Projected capacity requirements for server sizing based on 200 active users.</p>
+
+            <div class="grid grid-cols-2 gap-8">
+                <div class="benefit-card">
+                    <h3 class="text-[var(--konecta-yellow)]">Structured Data (Relational)</h3>
+                    <ul class="space-y-3 mt-4">
+                        <li class="flex justify-between">
+                            <span>Daily Punches:</span>
+                            <strong class="text-white">~1,600 rows/day</strong>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>Annual Growth:</span>
+                            <strong class="text-white">~600k rows/year</strong>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>Storage Requirement:</span>
+                            <strong class="text-green-400">< 1 GB / year</strong>
+                        </li>
+                    </ul>
+                    <p class="text-sm mt-4 text-gray-400">Low storage footprint; high transaction speed required.</p>
+                </div>
+
+                <div class="benefit-card border-t-blue-500">
+                    <h3 class="text-blue-400">Unstructured Data (Object Storage)</h3>
+                    <ul class="space-y-3 mt-4">
+                        <li class="flex justify-between">
+                            <span>Documents (PDF/IMG):</span>
+                            <strong class="text-white">~200 MB / week</strong>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>Annual Growth:</span>
+                            <strong class="text-white">~10 - 50 GB</strong>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>Storage Requirement:</span>
+                            <strong class="text-blue-400">High Capacity</strong>
+                        </li>
+                    </ul>
+                    <p class="text-sm mt-4 text-gray-400"><strong>Strategic Recommendation:</strong> Utilize Google Cloud Storage buckets for files to keep the Database performant.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 7: Roadmap -->
+        <section class="slide" data-slide-index="7">
+            <h2 class="slide-title">6. Execution <span class="slide-title-accent">Roadmap</span></h2>
+            <div class="space-y-6">
+                <!-- Step 1 -->
+                <div class="flex items-start">
+                    <div class="bg-[var(--konecta-yellow)] text-black font-bold w-12 h-12 rounded-full flex items-center justify-center text-xl shrink-0 mt-1">1</div>
+                    <div class="ml-6">
+                        <h3 class="text-2xl text-white font-bold">Schema Handover</h3>
+                        <p class="text-lg">Delivery of precise SQL Table definitions (Users, Punches, Requests) to initialize the relational database environment.</p>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="flex items-start">
+                    <div class="bg-gray-700 text-white font-bold w-12 h-12 rounded-full flex items-center justify-center text-xl shrink-0 mt-1">2</div>
+                    <div class="ml-6">
+                        <h3 class="text-2xl text-white font-bold">Infrastructure Deployment</h3>
+                        <p class="text-lg">Configuration of the Virtual Machine and provisioning of the Database Connection String and SSH Access by the Infrastructure Team.</p>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="flex items-start">
+                    <div class="bg-gray-700 text-white font-bold w-12 h-12 rounded-full flex items-center justify-center text-xl shrink-0 mt-1">3</div>
+                    <div class="ml-6">
+                        <h3 class="text-2xl text-white font-bold">Backend Development</h3>
+                        <p class="text-lg">Initiation of Node.js API development, testing endpoints against the new database structure to ensure feature parity.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 8: Conclusion -->
+        <section class="slide text-center" data-slide-index="8">
+            <h2 class="text-5xl font-bold text-white mb-8">Ready to Execute</h2>
+            <p class="text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                With the logic defined, the plan established, and the capabilities aligned, the foundation is set. Once the infrastructure is provisioned, the transformation of KOMPASS into a scalable enterprise asset begins.
+            </p>
+            <div class="mt-16">
+                <button class="bg-[var(--konecta-yellow)] text-black font-bold py-4 px-10 rounded-full text-xl shadow-lg hover:scale-105 transition-transform">
+                    Initiate Migration
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Navigation Footer -->
+    <footer id="nav-controls">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <button id="prev-btn" class="nav-button">Previous</button>
+            <span id="slide-counter" class="text-[var(--konecta-yellow)] font-bold text-lg">1 / 8</span>
+            <button id="next-btn" class="nav-button">Next</button>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let currentSlide = 1;
+            const slides = document.querySelectorAll('.slide');
+            const totalSlides = slides.length;
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const slideCounter = document.getElementById('slide-counter');
+
+            function showSlide(slideIndex) {
+                if (slideIndex < 1) slideIndex = 1;
+                if (slideIndex > totalSlides) slideIndex = totalSlides;
+                currentSlide = slideIndex;
+
+                slides.forEach((slide, index) => {
+                    if (index + 1 === currentSlide) {
+                        slide.classList.add('active');
+                    } else {
+                        slide.classList.remove('active');
+                    }
+                });
+
+                slideCounter.textContent = `${currentSlide} / ${totalSlides}`;
+                prevBtn.disabled = (currentSlide === 1);
+                nextBtn.disabled = (currentSlide === totalSlides);
+            }
+
+            function nextSlide() { showSlide(currentSlide + 1); }
+            function prevSlide() { showSlide(currentSlide - 1); }
+
+            prevBtn.addEventListener('click', prevSlide);
+            nextBtn.addEventListener('click', nextSlide);
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight') nextSlide();
+                if (e.key === 'ArrowLeft') prevSlide();
+            });
+
+            showSlide(currentSlide);
+        });
+    </script>
 </body>
 </html>
