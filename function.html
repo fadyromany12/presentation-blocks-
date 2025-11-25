@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KOMPASS Migration Strategy</title>
+    <style>
+        :root {
+            --konecta-dark: #2900c9;
+            --konecta-blue: #00a9e0;
+            --text-main: #111827;
+            --bg-slide: #ffffff;
+        }
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f3f4f6;
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+        .slide-container {
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+            height: 100vh;
+        }
+        .slide {
+            height: 100vh;
+            width: 100vw;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            box-sizing: border-box;
+            background: var(--bg-slide);
+            border-bottom: 1px solid #e5e7eb;
+            position: relative;
+        }
+        .slide:nth-child(even) {
+            background: #f9fafb;
+        }
+        .slide-content {
+            max-width: 900px;
+            width: 100%;
+        }
+        h1 {
+            font-size: 3.5rem;
+            color: var(--konecta-dark);
+            margin-bottom: 0.5rem;
+            line-height: 1.1;
+        }
+        h2 {
+            font-size: 2.5rem;
+            color: var(--konecta-blue);
+            margin-bottom: 1.5rem;
+        }
+        h3 {
+            font-size: 1.5rem;
+            color: var(--konecta-dark);
+            margin-top: 0;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        li::before {
+            content: "•";
+            color: var(--konecta-blue);
+            font-weight: bold;
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: -5px;
+        }
+        .highlight {
+            background-color: #e0e7ff;
+            color: var(--konecta-dark);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        .footer {
+            position: absolute;
+            bottom: 20px;
+            right: 40px;
+            font-size: 0.9rem;
+            color: #9ca3af;
+        }
+        .logo {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            font-weight: bold;
+            color: var(--konecta-dark);
+            font-size: 1.2rem;
+        }
+        .roadmap-step {
+            background: white;
+            border-left: 5px solid var(--konecta-blue);
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        .btn-nav {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--konecta-dark);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(41, 0, 201, 0.3);
+            z-index: 100;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="#" class="btn-nav" onclick="document.querySelector('.slide-container').scrollBy(0, window.innerHeight)">Next Slide ▼</a>
+
+    <div class="slide-container">
+        
+        <div class="slide">
+            <div class="logo">KOMPASS</div>
+            <div class="slide-content" style="text-align: center;">
+                <h1 style="margin-bottom: 10px;">KOMPASS Migration</h1>
+                <h3 style="color: #6b7280; font-weight: 400;">From Apps Script Prototype to Cloud Enterprise Application</h3>
+                <hr style="width: 100px; border: 2px solid var(--konecta-blue); margin: 30px auto;">
+                <p style="font-size: 1.2rem;"><strong>Goal:</strong> Migrate our 7-module HR Super-App to a scalable Node.js & PostgreSQL architecture on Google Cloud.</p>
+            </div>
+            <div class="footer">Slide 1/9</div>
+        </div>
+
+        <div class="slide">
+            <div class="logo">KOMPASS</div>
+            <div class="slide-content">
+                <h2>1. Workforce Management (WFM)</h2>
+                <p>Replacing the "Adherence" and "Punch" sheets with a high-speed SQL database.</p>
+                <ul>
+                    <li><strong>Smart Punch Clock:</strong> Validates "Login", "Break", and "Logout" in real-time. Prevents double-punching and sequential errors.</li>
+                    <li><strong>Adherence Engine:</strong> Automatically compares <em>Actual Punch Time</em> vs. <em>Scheduled Shift</em> to calculate <span class="highlight">Tardy</span> and <span class="highlight">Early Leave</span> seconds.</li>
+                    <li><strong>Project Tracking:</strong> Users select active projects (e.g., "Lenovo Support") to log billable hours per session.</li>
+                    <li><strong>Auto-Sweeper:</strong> A background job that runs daily to mark employees as "Absent" if they were scheduled but didn't punch in.</li>
+                </ul>
+            </div>
+            <div class="footer">Slide 2/9</div>
+        </div>
+
+        <div class="slide">
+            <div class="logo">KOMPASS</div>
+            <div class="slide-content">
+                <h2>2. Leave & Absence</h2>
+                <p>Moving from "Leave Requests" sheet to a relational transaction model.</p>
+                <ul>
+                    <li><strong>Balance Validation:</strong> Instant check against Annual/Sick/Casual balances before submission.</li>
+                    <li><strong>Dynamic Routing:</strong> Workflow routes requests: <em>Agent &rarr; Project Manager &rarr; Direct Manager &rarr; Approved</em>.</li>
+                    <li><strong>Sick Note Compliance:</strong> Enforces PDF uploads for sick leave. Files will move from Drive Folders to <strong>Google Cloud Storage</strong>.</li>
+                    <li><strong>Monthly Accrual:</strong> Automated script increments leave balances based on employee tenure (1+ year vs 10+ years).</li>
+                </ul>
+            </div>
+            <div class="footer">Slide 3/9</div>
+        </div>
+
+        <div class="slide">
+            <div class="logo">KOMPASS</div>
+            <div class="slide-content">
+                <h2>3. HRIS & Digital Files</h2>
+                <p>Centralizing Employee Core Data and PII.</p>
+                <ul>
+                    <li><strong>Digital Employee Files:</strong> We currently auto-generate Drive folders for every user (Payslips, Contracts).</li>
+                    <li><strong>Self-Service Profile:</strong> Agents update their own Address/Phone. Sensitive changes (IBAN) trigger an approval request log.</li>
+                    <li><strong>Hierarchy Visualization:</strong> A recursive "Tree View" allowing managers to see their direct and indirect reports.</li>
+                    <li><strong>Movement Requests:</strong> Formalized workflow for changing an employee's supervisor (Reporting Line changes).</li>
+                </ul>
+            </div>
+            <div class="footer">Slide 4/9</div>
+        </div>
+
+        <div class="slide">
+            <div class="logo">KOMPASS</div>
+            <div class="slide-content">
+                <h2>4. Talent & Quality (QA)</h2>
+                <p>Digitizing the Coaching and Review process.</p>
+                <ul>
+                    <li><strong>Dynamic Templates:</strong> Managers select templates (e.g., "Q1 Sales") which populate specific scoring criteria.</li>
+                    <li><strong>Performance Reviews:</strong> Quarterly/Annual review forms with 1-5 ratings stored historically.</li>
+                    <li><strong>Feedback Loop:</strong> Agents must digitally "Acknowledge" coaching sessions, creating a timestamped audit trail.</li>
+                </ul>
+            </div>
+            <div class="footer">Slide 5/9</div>
+        </div>
+
+        <div class="slide">
+            <div class="logo">KOMPASS</div>
+            <div class="slide-content">
+                <h2>5. Recruitment (ATS)</h2>
+                <p>Managing the "Candidate to Employee" lifecycle.</p>
+                <ul>
+                    <li><strong>Public Job Board:</strong> External facing application form for candidates.</li>
+                    <li><strong>Pipeline Management:</strong> Admin view to move candidates through stages (New &rarr; Interview &rarr; Offer).</li>
+                    <li><strong>One-Click Hiring:</strong> The "Hire" button automatically generates the Employee ID, creates the DB record, and initializes Drive folders.</li>
+                </ul>
+            </div>
+            <div class="footer">Slide 6/9</div>
+        </div>
+
+        <div class="slide">
+            <div class="logo">KOMPASS</div>
+            <div class="slide-content">
+                <h2>6. Scheduling & Security</h2>
+                <p>Enterprise-grade control and planning.</p>
+                <ul>
+                    <li><strong>Shift Planning:</strong> Admin interface to assign shifts and "Day Off" status.</li>
+                    <li><strong>Bulk CSV Import:</strong> Ability to upload hundreds of schedules at once.</li>
+                    <li><strong>RBAC Security:</strong> Strict Role-Based Access Control. <em>Agents</em> see self; <em>Managers</em> see team; <em>Superadmins</em> see all.</li>
+                    <li><strong>Audit Logs:</strong> Every action (Punch, Approval, Edit) is logged with User ID and Timestamp.</li>
+                </ul>
+            </div>
+            <div class="footer">Slide 7/9</div>
+        </div>
+
+        <div class="slide">
+            <div class="logo">KOMPASS</div>
+            <div class="slide-content">
+                <h2>Technical Roadmap</h2>
+                <div class="roadmap-step">
+                    <strong>Phase 1: Infrastructure (Programmers)</strong><br>
+                    Set up VM, Install Node.js, Install PostgreSQL, Configure Google Cloud Storage (for files).
+                </div>
+                <div class="roadmap-step">
+                    <strong>Phase 2: Database Migration (Joint Effort)</strong><br>
+                    I will provide the <em>Schema Definition</em>. We need to create the tables (Users, Punches, Requests) and migrate data from Google Sheets.
+                </div>
+                <div class="roadmap-step">
+                    <strong>Phase 3: Backend Logic (My Focus)</strong><br>
+                    I will translate the business logic from <code>code.gs</code> to a <strong>Node.js/Express API</strong>.
+                </div>
+                <div class="roadmap-step">
+                    <strong>Phase 4: Integration</strong><br>
+                    Connect the existing Frontend (HTML) to the new Node.js API endpoints.
+                </div>
+            </div>
+            <div class="footer">Slide 8/9</div>
+        </div>
+
+        <div class="slide">
+            <div class="logo">KOMPASS</div>
+            <div class="slide-content">
+                <h2>Immediate Requirements</h2>
+                <p>To begin development, I need the following from the DevOps/Cloud team:</p>
+                <ul>
+                    <li><span class="highlight">Database Access:</span> Host, Port, Database Name, User, Password (PostgreSQL).</li>
+                    <li><span class="highlight">VM Access:</span> SSH Credentials or Console Access to deploy the Node.js app.</li>
+                    <li><span class="highlight">GCP Service Account:</span> A JSON Key file with permissions for <strong>Google Drive API</strong> and <strong>Cloud Storage</strong> (to maintain file upload functionality).</li>
+                </ul>
+            </div>
+            <div class="footer">Slide 9/9</div>
+        </div>
+
+    </div>
+</body>
+</html>
