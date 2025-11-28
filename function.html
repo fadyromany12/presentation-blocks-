@@ -230,31 +230,31 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="benefit-card">
                     <h3 class="text-[var(--konecta-yellow)]">1. Workforce Operations</h3>
-                    <p>A real-time Time & Attendance engine. It includes a smart punch clock, adherence calculation logic (Tardy/Overtime), and live floor monitoring dashboards.</p>
+                    <p>A real-time Time & Attendance engine. Includes smart punch clock, Overtime requests, and adherence calculation logic.</p>
                 </div>
                 <div class="benefit-card">
                     <h3 class="text-[var(--konecta-yellow)]">2. Leave & Absence</h3>
-                    <p>End-to-end absence management. Features self-service requests, automated balance accruals, multi-tier approval workflows, and "Sick Note" compliance.</p>
+                    <p>End-to-end absence management. Features self-service requests, automated balance accruals, and "Sick Note" compliance.</p>
                 </div>
                 <div class="benefit-card">
-                    <h3 class="text-[var(--konecta-yellow)]">3. HRIS & Digital Files</h3>
-                    <p>The employee "Digital Twin." Automatically generates Drive folders for every user, manages reporting lines hierarchy, and secures PII data.</p>
+                    <h3 class="text-[var(--konecta-yellow)]">3. HRIS, Assets & Lifecycle</h3>
+                    <p>The employee "Digital Twin." Manages profiles, Asset tracking, PII Change requests, and Offboarding workflows.</p>
                 </div>
                 <div class="benefit-card">
                     <h3 class="text-[var(--konecta-yellow)]">4. QA & Performance</h3>
-                    <p>A comprehensive talent management suite. Managers utilize dynamic coaching templates, track long-term scores, and enforce digital acknowledgement loops.</p>
+                    <p>A comprehensive talent management suite. Managers utilize dynamic coaching templates, track long-term scores, and reviews.</p>
                 </div>
                 <div class="benefit-card">
                     <h3 class="text-[var(--konecta-yellow)]">5. Recruitment (ATS)</h3>
-                    <p>Full-cycle Applicant Tracking System. Manages candidates from public application to interview stages, with one-click hiring that provisions all assets instantly.</p>
+                    <p>Full-cycle Applicant Tracking. Manages Job Requisitions and candidates from application to one-click hiring.</p>
                 </div>
                 <div class="benefit-card">
-                    <h3 class="text-[var(--konecta-yellow)]">6. Scheduling & Planning</h3>
-                    <p>Strategic workforce planning tools. Supports bulk CSV roster imports, shift pattern enforcement, and intelligent logic distinguishing "Day Off" from "Absent".</p>
+                    <h3 class="text-[var(--konecta-yellow)]">6. Scheduling & Project Admin</h3>
+                    <p>Strategic planning tools. Supports bulk CSV roster imports, Project-specific break configs, and admin dashboards.</p>
                 </div>
                 <div class="benefit-card md:col-span-3 lg:col-span-3 xl:col-span-3 flex flex-col items-center text-center">
-                    <h3 class="text-[var(--konecta-yellow)]">7. Administration & Security</h3>
-                    <p class="max-w-2xl">Enterprise-grade governance foundation. Features Role-Based Access Control (RBAC), comprehensive audit trails for compliance, and system-wide broadcasting tools.</p>
+                    <h3 class="text-[var(--konecta-yellow)]">7. Finance & Administration</h3>
+                    <p class="max-w-2xl">Enterprise governance. Features Financial Entitlements (Payroll), Dynamic RBAC (Role-Based Access), and Audit Trails.</p>
                 </div>
             </div>
         </section>
@@ -271,20 +271,20 @@
                 <div class="bg-gray-800 p-8 rounded-xl border border-gray-600">
                     <h3 class="text-2xl text-white font-bold mb-6 border-b border-gray-600 pb-2">Agent Capabilities</h3>
                     <ul class="function-list text-gray-300">
-                        <li><strong>Digital Punch Clock:</strong> One-click interface for Login, Breaks, Lunch, and Logout.</li>
-                        <li><strong>Project Allocation:</strong> Select specific client projects (e.g., "Lenovo Support") to log billable hours.</li>
-                        <li><strong>Real-Time Status:</strong> Visual feedback on current state (e.g., "On Lunch - 25 mins elapsed").</li>
-                        <li><strong>Aux Code Tracking:</strong> Log non-production time like "Coaching" or "Meeting" accurately.</li>
+                        <li><strong>Smart Punch Clock:</strong> Login, Break, and Lunch tracking with "Double-Punch" prevention.</li>
+                        <li><strong>Overtime Requests:</strong> New workflow for agents to request and track extra hours (Pre/Post shift).</li>
+                        <li><strong>Project Logging:</strong> Allocate time to specific client projects for billable hour tracking.</li>
+                        <li><strong>Real-Time Status:</strong> Visual timers showing elapsed time in current state.</li>
                     </ul>
                 </div>
                 <!-- System Logic -->
                 <div class="bg-gray-900 p-8 rounded-xl border border-[var(--konecta-yellow)]">
                     <h3 class="text-2xl text-[var(--konecta-yellow)] font-bold mb-6 border-b border-gray-700 pb-2">System Logic & Automation</h3>
                     <ul class="function-list system-list text-gray-300">
-                        <li><strong>Adherence Engine:</strong> Calculates deviation (Tardy/Early Leave) by comparing actual punches vs. scheduled shifts instantly.</li>
-                        <li><strong>Validation Logic:</strong> Prevents sequential errors (e.g., trying to "Login" when already logged in).</li>
-                        <li><strong>Auto-Sweeper:</strong> Background job that identifies scheduled employees who failed to punch and marks them "Absent".</li>
-                        <li><strong>Live Dashboard:</strong> Pushes real-time state changes to the Manager's Command Center.</li>
+                        <li><strong>Adherence Engine:</strong> Auto-calculates Tardy and Early Leave based on Shift Start/End times.</li>
+                        <li><strong>Break Logic:</strong> Enforces project-specific break durations and windows (via Break_Config).</li>
+                        <li><strong>Auto-Sweeper:</strong> Detects "No Call, No Show" and auto-marks "Absent".</li>
+                        <li><strong>Aux Code Validation:</strong> Prevents unauthorized code usage (e.g., Coaching during Lunch).</li>
                     </ul>
                 </div>
             </div>
@@ -298,20 +298,20 @@
                 <div class="bg-gray-800 p-8 rounded-xl border border-gray-600">
                     <h3 class="text-2xl text-white font-bold mb-6 border-b border-gray-600 pb-2">Employee Functions</h3>
                     <ul class="function-list text-gray-300">
-                        <li><strong>Self-Service Portal:</strong> Submit Annual, Sick, or Casual leave requests directly.</li>
-                        <li><strong>Balance Visualization:</strong> View real-time remaining days for each leave type before applying.</li>
-                        <li><strong>Compliance Uploads:</strong> Mandatory PDF upload interface for "Sick Leave" justification.</li>
-                        <li><strong>Request History:</strong> Track status of all past and pending applications.</li>
+                        <li><strong>Self-Service Portal:</strong> Submit Annual, Sick, or Casual leave requests.</li>
+                        <li><strong>Balance View:</strong> Real-time visibility of remaining entitlements.</li>
+                        <li><strong>Compliance Uploads:</strong> Mandatory PDF upload for "Sick Leave" justification.</li>
+                        <li><strong>Request History:</strong> Full audit trail of past approvals and rejections.</li>
                     </ul>
                 </div>
                 <!-- System Logic -->
                 <div class="bg-gray-900 p-8 rounded-xl border border-[var(--konecta-yellow)]">
                     <h3 class="text-2xl text-[var(--konecta-yellow)] font-bold mb-6 border-b border-gray-700 pb-2">System Logic & Automation</h3>
                     <ul class="function-list system-list text-gray-300">
-                        <li><strong>Pre-Submission Validation:</strong> Instantly rejects requests if the user has insufficient balance.</li>
-                        <li><strong>Smart Routing:</strong> Dynamically routes approval to Project Manager or Direct Manager based on hierarchy.</li>
-                        <li><strong>Auto-Deduction:</strong> Debits leave balances immediately upon final approval.</li>
-                        <li><strong>Schedule Integration:</strong> Automatically updates the shift roster to reflect "On Leave" status for approved dates.</li>
+                        <li><strong>Balance Validation:</strong> Instantly rejects requests exceeding available balance.</li>
+                        <li><strong>Approval Routing:</strong> Dynamic routing to Direct Manager or Project Manager based on hierarchy.</li>
+                        <li><strong>Auto-Deduction:</strong> Debits balances upon final approval.</li>
+                        <li><strong>Monthly Accrual:</strong> Automated script increments balances based on tenure.</li>
                     </ul>
                 </div>
             </div>
@@ -319,26 +319,26 @@
 
         <!-- Slide 6: Deep Dive - Pillar 3 -->
         <section class="slide" data-slide-index="6">
-            <h2 class="slide-title">Deep Dive: <span class="slide-title-accent">HRIS & Digital Files</span></h2>
+            <h2 class="slide-title">Deep Dive: <span class="slide-title-accent">HRIS, Assets & Lifecycle</span></h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
                 <!-- User Capabilities -->
                 <div class="bg-gray-800 p-8 rounded-xl border border-gray-600">
-                    <h3 class="text-2xl text-white font-bold mb-6 border-b border-gray-600 pb-2">Profile Management</h3>
+                    <h3 class="text-2xl text-white font-bold mb-6 border-b border-gray-600 pb-2">Profile & Lifecycle</h3>
                     <ul class="function-list text-gray-300">
-                        <li><strong>Digital Profile:</strong> Employees can view and update contact details (Address, Phone, Emergency Contact).</li>
-                        <li><strong>Hierarchy View:</strong> Interactive "Tree View" allowing managers to navigate their direct and indirect reports.</li>
-                        <li><strong>Movement Requests:</strong> Formal workflow for requesting supervisor changes (Reporting Line updates).</li>
-                        <li><strong>Document Access:</strong> Secure links to personal Payslips and Contracts.</li>
+                        <li><strong>Data Change Requests:</strong> Workflow for agents to request updates to PII (Address, IBAN).</li>
+                        <li><strong>Asset View:</strong> Agents can see hardware/assets assigned to them.</li>
+                        <li><strong>Resignation Request:</strong> Formal workflow for initiating self-resignation.</li>
+                        <li><strong>Hierarchy View:</strong> Interactive tree view of reporting lines.</li>
                     </ul>
                 </div>
                 <!-- System Logic -->
                 <div class="bg-gray-900 p-8 rounded-xl border border-[var(--konecta-yellow)]">
                     <h3 class="text-2xl text-[var(--konecta-yellow)] font-bold mb-6 border-b border-gray-700 pb-2">System Logic & Automation</h3>
                     <ul class="function-list system-list text-gray-300">
-                        <li><strong>Asset Provisioning:</strong> Automatically generates and names Google Drive folders for new hires.</li>
-                        <li><strong>Sensitive Data Guard:</strong> Monitors critical fields (IBAN, Name); changes trigger an audit log/approval request.</li>
-                        <li><strong>Structure Integrity:</strong> Prevents circular reporting lines when processing hierarchy moves.</li>
-                        <li><strong>Offboarding Protocol:</strong> Standardized termination sequence to revoke access and archive data.</li>
+                        <li><strong>Offboarding Workflow:</strong> Manages termination logic, asset return status, and "Exit Date".</li>
+                        <li><strong>Data Guard:</strong> Locks sensitive fields (Salary, National ID) from direct editing.</li>
+                        <li><strong>Asset Inventory:</strong> Centralized tracking of all company assets linked to Employee IDs.</li>
+                        <li><strong>Reporting Lines:</strong> Prevents circular references in hierarchy changes.</li>
                     </ul>
                 </div>
             </div>
@@ -350,22 +350,22 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
                 <!-- User Capabilities -->
                 <div class="bg-gray-800 p-8 rounded-xl border border-gray-600">
-                    <h3 class="text-2xl text-white font-bold mb-6 border-b border-gray-600 pb-2">Manager & Agent Tools</h3>
+                    <h3 class="text-2xl text-white font-bold mb-6 border-b border-gray-600 pb-2">Talent Management</h3>
                     <ul class="function-list text-gray-300">
-                        <li><strong>Template Selection:</strong> Managers choose from dynamic templates (e.g., "Q1 Sales", "Soft Skills").</li>
-                        <li><strong>Scorecard Submission:</strong> Interactive forms for rating criteria and adding qualitative feedback.</li>
-                        <li><strong>Digital Acknowledgement:</strong> Agents must sign off on feedback digitally, ensuring alignment.</li>
-                        <li><strong>History Review:</strong> Access to a chronological log of all performance scores and reviews.</li>
+                        <li><strong>Coaching Forms:</strong> Managers submit sessions using dynamic templates (e.g., "Q1 Sales").</li>
+                        <li><strong>Performance Reviews:</strong> Periodic (Q1/Q2/Annual) rating submission (1-5 scale).</li>
+                        <li><strong>Digital Acknowledge:</strong> Agents sign off on coaching feedback digitally.</li>
+                        <li><strong>Score History:</strong> Historical view of all QA scores and trends.</li>
                     </ul>
                 </div>
                 <!-- System Logic -->
                 <div class="bg-gray-900 p-8 rounded-xl border border-[var(--konecta-yellow)]">
                     <h3 class="text-2xl text-[var(--konecta-yellow)] font-bold mb-6 border-b border-gray-700 pb-2">System Logic & Automation</h3>
                     <ul class="function-list system-list text-gray-300">
-                        <li><strong>Dynamic Rendering:</strong> Generates form fields on the fly based on the selected JSON template.</li>
-                        <li><strong>Score Calculation:</strong> Auto-computes weighted averages and percentages for QA sessions.</li>
-                        <li><strong>Feedback Loop Enforcement:</strong> Tracks "Pending Acknowledgement" status to ensure compliance.</li>
-                        <li><strong>Data Isolation:</strong> Ensures agents only see their own reviews, while managers see their team's.</li>
+                        <li><strong>Dynamic Templates:</strong> Renders forms based on active JSON templates (Category/Criteria).</li>
+                        <li><strong>Score Calculation:</strong> Auto-computes weighted averages for QA sessions.</li>
+                        <li><strong>Visibility Scoping:</strong> Ensures agents only see their own data; managers see their team's.</li>
+                        <li><strong>Review Cycle:</strong> Tracks completion status of quarterly reviews.</li>
                     </ul>
                 </div>
             </div>
@@ -377,22 +377,21 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
                 <!-- User Capabilities -->
                 <div class="bg-gray-800 p-8 rounded-xl border border-gray-600">
-                    <h3 class="text-2xl text-white font-bold mb-6 border-b border-gray-600 pb-2">Recruitment Functions</h3>
+                    <h3 class="text-2xl text-white font-bold mb-6 border-b border-gray-600 pb-2">Hiring Tools</h3>
                     <ul class="function-list text-gray-300">
-                        <li><strong>Public Job Board:</strong> External-facing application portal for candidates to submit data and CVs.</li>
-                        <li><strong>Pipeline View:</strong> Kanban-style status management (Applied &rarr; Interview &rarr; Offer &rarr; Hired).</li>
-                        <li><strong>Candidate Search:</strong> Filterable database of all applicants and their history.</li>
-                        <li><strong>Hiring Wizard:</strong> A simplified form to finalize contract details for selected candidates.</li>
+                        <li><strong>Requisitions:</strong> Managers can open new Job Requisitions (Positions).</li>
+                        <li><strong>Public Job Board:</strong> External portal for candidate applications.</li>
+                        <li><strong>Pipeline Manager:</strong> Kanban view for moving candidates (Applied -> Interview -> Offer).</li>
+                        <li><strong>Hiring Wizard:</strong> One-form hiring process to finalize contract details.</li>
                     </ul>
                 </div>
                 <!-- System Logic -->
                 <div class="bg-gray-900 p-8 rounded-xl border border-[var(--konecta-yellow)]">
                     <h3 class="text-2xl text-[var(--konecta-yellow)] font-bold mb-6 border-b border-gray-700 pb-2">System Logic & Automation</h3>
                     <ul class="function-list system-list text-gray-300">
-                        <li><strong>One-Click Hiring:</strong> Triggering "Hire" creates the DB record, generates Employee ID, and initializes balances instantly.</li>
-                        <li><strong>Duplicate Detection:</strong> Flags candidates who have applied previously to prevent redundancy.</li>
-                        <li><strong>External Integration:</strong> Fetches applications from a secure buffer sheet to protect internal data.</li>
-                        <li><strong>Status Transitioning:</strong> Automates the lifecycle movement from "Candidate" to "Employee".</li>
+                        <li><strong>One-Click Onboarding:</strong> "Hire" action creates User ID, Email, Drive Folders, and Balances instantly.</li>
+                        <li><strong>Duplicate Check:</strong> Identifies repeat applicants via Email/National ID.</li>
+                        <li><strong>Buffer Integration:</strong> Securely ingests external applications into the internal database.</li>
                     </ul>
                 </div>
             </div>
@@ -400,25 +399,25 @@
 
         <!-- Slide 9: Deep Dive - Pillar 6 -->
         <section class="slide" data-slide-index="9">
-            <h2 class="slide-title">Deep Dive: <span class="slide-title-accent">Scheduling & Planning</span></h2>
+            <h2 class="slide-title">Deep Dive: <span class="slide-title-accent">Scheduling & Project Admin</span></h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
                 <!-- User Capabilities -->
                 <div class="bg-gray-800 p-8 rounded-xl border border-gray-600">
-                    <h3 class="text-2xl text-white font-bold mb-6 border-b border-gray-600 pb-2">Planning Tools</h3>
+                    <h3 class="text-2xl text-white font-bold mb-6 border-b border-gray-600 pb-2">Admin Tools</h3>
                     <ul class="function-list text-gray-300">
-                        <li><strong>Bulk CSV Import:</strong> Upload rosters for hundreds of agents at once using a standardized template.</li>
-                        <li><strong>Manual Editor:</strong> Fine-tune individual shifts or override statuses for specific days.</li>
-                        <li><strong>Status Designation:</strong> Explicitly mark days as "Shift", "Day Off", or "Leave".</li>
-                        <li><strong>Template Download:</strong> Download current roster formats for offline editing.</li>
+                        <li><strong>Project Dashboard:</strong> View headcount and stats per project/campaign.</li>
+                        <li><strong>Bulk Importer:</strong> Upload hundreds of shifts via CSV with validation.</li>
+                        <li><strong>Manual Schedule:</strong> Fine-tune individual rosters and days off.</li>
+                        <li><strong>Project Creation:</strong> Create new Projects and assign Managers.</li>
                     </ul>
                 </div>
                 <!-- System Logic -->
                 <div class="bg-gray-900 p-8 rounded-xl border border-[var(--konecta-yellow)]">
                     <h3 class="text-2xl text-[var(--konecta-yellow)] font-bold mb-6 border-b border-gray-700 pb-2">System Logic & Automation</h3>
                     <ul class="function-list system-list text-gray-300">
-                        <li><strong>Gap Detection:</strong> Distinguishes between a "Scheduled Day Off" (No punch needed) and "Absent" (Missed shift).</li>
-                        <li><strong>Format Validation:</strong> Parses incoming CSVs for date/time errors before committing to the database.</li>
-                        <li><strong>Conflict Resolution:</strong> Prioritizes "Approved Leave" over uploaded shift data to prevent errors.</li>
+                        <li><strong>Gap Analysis:</strong> Distinguishes "Scheduled Day Off" vs. "Absent" automatically.</li>
+                        <li><strong>Project Configs:</strong> Applies project-specific settings (e.g., distinct break times per campaign).</li>
+                        <li><strong>Conflict Check:</strong> Prioritizes approved Leave over new schedule uploads.</li>
                     </ul>
                 </div>
             </div>
@@ -426,25 +425,25 @@
 
         <!-- Slide 10: Deep Dive - Pillar 7 -->
         <section class="slide" data-slide-index="10">
-            <h2 class="slide-title">Deep Dive: <span class="slide-title-accent">Administration & Security</span></h2>
+            <h2 class="slide-title">Deep Dive: <span class="slide-title-accent">Finance & Administration</span></h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
                 <!-- User Capabilities -->
                 <div class="bg-gray-800 p-8 rounded-xl border border-gray-600">
                     <h3 class="text-2xl text-white font-bold mb-6 border-b border-gray-600 pb-2">Superadmin Controls</h3>
                     <ul class="function-list text-gray-300">
-                        <li><strong>User Registration Gateway:</strong> Review and approve/deny new account requests before activation.</li>
-                        <li><strong>Role Management:</strong> Process requests for role elevation (e.g., Agent to Admin).</li>
-                        <li><strong>Announcements:</strong> Create and broadcast system-wide banners to all active users.</li>
-                        <li><strong>Template Builder:</strong> Create and modify coaching forms without code changes.</li>
+                        <li><strong>Financial Entitlements:</strong> Manage payroll additions (Bonuses, Allowances, Variable Pay).</li>
+                        <li><strong>User Gateway:</strong> Approve/Deny new user registrations.</li>
+                        <li><strong>Role Management:</strong> Approve requests for role upgrades (Agent -> Admin).</li>
+                        <li><strong>Announcements:</strong> Broadcast system-wide messages to all users.</li>
                     </ul>
                 </div>
                 <!-- System Logic -->
                 <div class="bg-gray-900 p-8 rounded-xl border border-[var(--konecta-yellow)]">
                     <h3 class="text-2xl text-[var(--konecta-yellow)] font-bold mb-6 border-b border-gray-700 pb-2">System Logic & Automation</h3>
                     <ul class="function-list system-list text-gray-300">
-                        <li><strong>RBAC Enforcement:</strong> Strict Role-Based Access Control ensuring secure data partitioning.</li>
-                        <li><strong>Audit Logging:</strong> Immutable logs of every critical action (Timestamp, User ID, Action Type).</li>
-                        <li><strong>Session Security:</strong> Validates user identity against the database on every API call.</li>
+                        <li><strong>Dynamic RBAC:</strong> Permission matrix (RBAC_Config) controls access to every module.</li>
+                        <li><strong>Audit Trails:</strong> Logs every critical action (Entitlement updates, Punches, Edits).</li>
+                        <li><strong>Session Security:</strong> Validates user role and status on every API call.</li>
                     </ul>
                 </div>
             </div>
